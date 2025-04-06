@@ -20,7 +20,6 @@ def add_zakat(nama, jenis_zakat, jumlah, tanggal):
     cursor.close()
     conn.close()
 
-# Fungsi untuk mengupdate data zakat
 def update_zakat(id, nama, jenis_zakat, jumlah, tanggal):
     conn = create_connection()
     cursor = conn.cursor()
@@ -34,7 +33,7 @@ def update_zakat(id, nama, jenis_zakat, jumlah, tanggal):
     cursor.close()
     conn.close()
 
-# Fungsi untuk menghapus data zakat
+
 def delete_zakat(id):
     conn = create_connection()
     cursor = conn.cursor()
