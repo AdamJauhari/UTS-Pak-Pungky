@@ -77,11 +77,18 @@ def add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal):
     conn = create_connection()
     cursor = conn.cursor()
     
-    # Menghitung total harga beras
+    # Mengecek apakah ID beras ada di database
     query_beras = "SELECT harga_per_kg FROM master_beras WHERE id = %s"
     cursor.execute(query_beras, (id_beras,))
-    harga_per_kg = cursor.fetchone()[0]
+    result = cursor.fetchone()
     
+    if result is None:
+        print("Error: ID beras tidak ditemukan!")
+        cursor.close()
+        conn.close()
+        return
+    
+    harga_per_kg = result[0]
     total_harga = harga_per_kg * jumlah_beras
     
     query = """INSERT INTO transaksi_zakat (id_zakat, id_beras, jumlah_beras, total_harga, tanggal) 
@@ -91,6 +98,7 @@ def add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal):
     conn.commit()
     cursor.close()
     conn.close()
+    print("Transaksi zakat berhasil ditambahkan!")
 
 # Fungsi untuk menampilkan transaksi zakat
 def view_transaksi_zakat():
@@ -125,7 +133,16 @@ def export_to_excel():
     conn.close()
     print("Data zakat berhasil diekspor ke dalam file 'data_zakat.xlsx'")
 
-# Fungsi utama untuk menjalankan aplikasi
+# Fungsi baru untuk menambahkan data master beras melalui input
+def input_master_beras():
+    print("\nTambah Data Master Beras")
+    nama_beras = input("Masukkan nama jenis beras: ")
+    harga_per_kg = float(input("Masukkan harga per kg: "))
+    
+    add_beras(nama_beras, harga_per_kg)
+    print("Data master beras berhasil ditambahkan!")
+
+# Fungsi utama yang dimodifikasi
 def main():
     while True:
         print("\nMenu:")
@@ -133,12 +150,13 @@ def main():
         print("2. Edit Data Zakat")
         print("3. Hapus Data Zakat")
         print("4. Lihat Data Master Beras")
-        print("5. Tambah Transaksi Zakat")
-        print("6. Lihat Transaksi Zakat")
-        print("7. Ekspor Data Zakat ke Excel")
-        print("8. Keluar")
+        print("5. Tambah Data Master Beras")  # Menu baru
+        print("6. Tambah Transaksi Zakat")
+        print("7. Lihat Transaksi Zakat")
+        print("8. Ekspor Data Zakat ke Excel")
+        print("9. Keluar")
         
-        choice = input("Pilih opsi (1-8): ")
+        choice = input("Pilih opsi (1-9): ")
         
         if choice == "1":
             nama = input("Masukkan nama: ")
@@ -163,27 +181,30 @@ def main():
             print("Data zakat berhasil dihapus.")
         
         elif choice == "4":
-            print("Master Data Beras:")
+            print("\nMaster Data Beras:")
             view_master_beras()
         
-        elif choice == "5":
-            id_zakat = int(input("Masukkan ID zakat: "))
-            id_beras = int(input("Masukkan ID beras: "))
-            jumlah_beras = int(input("Masukkan jumlah beras (kg): "))
-            tanggal = input("Masukkan tanggal (YYYY-MM-DD): ")
-            add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal)
-            print("Transaksi zakat berhasil ditambahkan.")
+        elif choice == "5":  # Opsi baru untuk input master beras
+            input_master_beras()
         
         elif choice == "6":
-            print("Transaksi Zakat:")
-            view_transaksi_zakat()
+            id_zakat = int(input("Masukkan ID zakat: "))
+            id_beras = int(input("Masukkan ID beras: "))
+            jumlah_beras = float(input("Masukkan jumlah beras (kg): "))
+            tanggal = input("Masukkan tanggal (YYYY-MM-DD): ")
+            add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal)
         
         elif choice == "7":
-            export_to_excel()
+            print("\nTransaksi Zakat:")
+            view_transaksi_zakat()
         
         elif choice == "8":
+            export_to_excel()
+        
+        elif choice == "9":
             print("Keluar dari program.")
             break
+        
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
 
