@@ -7,7 +7,7 @@ def create_connection():
         host="localhost",      # Alamat MySQL
         user="root",           # Username MySQL
         password="",   # Password MySQL
-        database="" # Nama database
+        database="Zakat" # Nama database
     )
 
 # Fungsi untuk menambahkan data zakat
