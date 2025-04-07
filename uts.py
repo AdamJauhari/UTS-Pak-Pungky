@@ -45,7 +45,6 @@ def delete_zakat(id):
     cursor.close()
     conn.close()
 
-# Fungsi untuk menambahkan data beras ke dalam master data beras
 def add_beras(nama_beras, harga_per_kg):
     conn = create_connection()
     cursor = conn.cursor()
@@ -57,7 +56,6 @@ def add_beras(nama_beras, harga_per_kg):
     cursor.close()
     conn.close()
 
-# Fungsi untuk menampilkan data master beras
 def view_master_beras():
     conn = create_connection()
     cursor = conn.cursor()
@@ -72,7 +70,6 @@ def view_master_beras():
     cursor.close()
     conn.close()
 
-# Fungsi untuk menambahkan transaksi zakat (beras yang didistribusikan)
 def add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal):
     conn = create_connection()
     cursor = conn.cursor()
@@ -100,7 +97,6 @@ def add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal):
     conn.close()
     print("Transaksi zakat berhasil ditambahkan!")
 
-# Fungsi untuk menampilkan transaksi zakat
 def view_transaksi_zakat():
     conn = create_connection()
     cursor = conn.cursor()
