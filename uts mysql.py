@@ -74,7 +74,6 @@ def add_transaksi_zakat(id_zakat, id_beras, jumlah_beras, tanggal):
     conn = create_connection()
     cursor = conn.cursor()
     
-    # Mengecek apakah ID beras ada di database
     query_beras = "SELECT harga_per_kg FROM master_beras WHERE id = %s"
     cursor.execute(query_beras, (id_beras,))
     result = cursor.fetchone()
@@ -115,7 +114,6 @@ def view_transaksi_zakat():
     cursor.close()
     conn.close()
 
-# Fungsi untuk mengekspor data zakat ke Excel
 def export_to_excel():
     conn = create_connection()
     query = "SELECT * FROM zakat_data"
