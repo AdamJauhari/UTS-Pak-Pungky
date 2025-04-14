@@ -1,8 +1,14 @@
-from openpyxl import Workbook, load_workbook
-from openpyxl.utils import get_column_letter
+try:
+    from openpyxl import Workbook, load_workbook
+    from openpyxl.utils import get_column_letter
+except ImportError:
+    print("Error: Modul 'openpyxl' belum terinstall.")
+    print("Silakan install terlebih dahulu dengan perintah:")
+    print("pip install openpyxl")
+    exit()
+
 import os
 from datetime import datetime
-
 # Excel file paths
 ZAKAT_DATA_FILE = "zakat_data.xlsx"
 MASTER_BERAS_FILE = "master_beras.xlsx"
