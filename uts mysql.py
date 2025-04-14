@@ -1,5 +1,17 @@
-import mysql.connector
-import pandas as pd
+try:
+    import mysql.connector
+except ImportError:
+    print("Error: Modul 'MySql' Belum diaktifkan")
+    print("Silakan Aktifkan terlebih dahulu di Aplikasi XAMPP:")
+    print("Aktifkan Apache dan MySql")
+    exit()
+try:
+    import pandas as pd
+except ImportError:
+    print("Error: Modul 'pandas' belum terinstall.")
+    print("Silakan install terlebih dahulu dengan perintah:")
+    print("pip install pandas")
+    exit()
 
 def create_connection():
     return mysql.connector.connect(
