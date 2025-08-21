@@ -42,5 +42,14 @@ pip install mysql-connector-python pandas
 - Pastikan koneksi ke MySQL sesuai dengan konfigurasi di kode.
 - Jika ada error modul, pastikan sudah menginstal semua kebutuhan Python.
 
+
 ## Lisensi
 Program ini dibuat untuk keperluan pembelajaran dan tugas UTS.
+
+## Keterangan
+Program ini dibuat untuk menyelesaikan tugas Mata Kuliah Praktikum Pemrograman Berorientasi Objek.
+
+## Anggota Kelompok
+- Adam Arias Jauhari
+- MHD Aldy Syahputra
+- Vicky Maulana Romadan
